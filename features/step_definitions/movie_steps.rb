@@ -60,3 +60,25 @@ end
 When /^I click the "([^"]+)" button/ do |element|
   page.find("##{element}").click
 end
+
+Given /^I (un)?check all of the ratings$/ do |uncheck|
+  rating_list = "G, PG, PG-13, R".split(', ')
+  rating_list.each do |rating|
+    box = find("#ratings_#{rating}")
+    if uncheck
+      box.set(false)
+    else
+      box.set(true)
+    end
+  end
+end
+
+Then /^I should see all of the (.+)$/ do |objects|
+  value = 11 #10 movies + header
+  rows = page.all("table##{objects} tr").count
+  if rows.respond_to? :should
+    rows.should == value
+  else
+    assert rows == value 
+  end
+end

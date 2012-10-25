@@ -35,6 +35,10 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: no ratings selected
   # see assignment
+  Given I uncheck all of the ratings
+  Then I should see all of the movies
 
 Scenario: all ratings selected
-  # see assignment
+  # see assignmento
+  Given I check all of the ratings
+  Then I should see all of the movies
