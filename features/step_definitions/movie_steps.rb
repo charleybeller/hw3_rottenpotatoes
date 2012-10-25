@@ -15,7 +15,14 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  flunk "Unimplemented"
+#  flunk "Unimplemented"
+  first = page.body.index(e1)
+  second = page.body.index(e2)
+  if first.respond_to? :should
+    first.should < second
+  else
+    assert first < second
+  end
 end
 
 Then /I should see movies titled (.+)$/ do |titles|
